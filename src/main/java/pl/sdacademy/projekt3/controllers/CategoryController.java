@@ -19,7 +19,7 @@ public class CategoryController {
     }
 
     @GetMapping("/list")
-    public String findList(ModelMap modelMap) {
+    public String findAll(ModelMap modelMap) {
         List<Category> categories = categoryRepository.findAll();
         modelMap.addAttribute("categories", categories);
         return "category/list";
