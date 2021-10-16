@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Memy</title>
+</head>
+<body>
+<h1>Memy:</h1>
+<table>
+    <tr>
+        <th>Kategoria</th>
+        <th>Tytuł</th>
+        <th>Opis</th>
+        <th>Użytkownik</th>
+        <th>Ocena</th>
+    </tr>
+    <tr th:each="meme : ${memes}">
+        <td th:text="${meme.category}"></td>
+        <td th:text="${meme.title}"></td>
+        <td th:text="${meme.description}"></td>
+        <td th:text="${meme.user}"></td>
+        <td th:text="${meme.rating}"></td>
+    </tr>
+</table>
+</body>
+</html>

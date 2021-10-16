@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj meme</title>
+</head>
+<body>
+<h1>Dodaj meme</h1>
+<form th:object="${meme}" method="post">
+    <label>Kategoria: <input type="text" th:field="*{category}"></label>
+    <label>Tytuł: <input type="text" th:field="*{title}"></label>
+    <label>Opis (obrazek): <input type="text" th:field="*{description}"></label>
+    <label>Uzytkownik: <input type="text" th:field="*{user}"></label>
+    <input type="submit">
+</form>
+</body>
+</html>
