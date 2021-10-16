@@ -14,4 +14,16 @@ public class Comment {
     private String user; //String później zamienić na User
     private String comment;
     private int memId;
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public int getMemId() {
+        return memId;
+    }
 }

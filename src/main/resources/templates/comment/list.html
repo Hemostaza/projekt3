@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Komenatarze</title>
+</head>
+<body>
+<h1>Lista komentarzy</h1>
+<table>
+    <tr>
+        <th>Użytkownik</th>
+        <th>Komenatrz</th>
+    </tr>
+    <tr th:each="comment: ${comments}">
+        <td th:text="${comment.user}"></td>
+        <td th:text="${comment.comment}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
