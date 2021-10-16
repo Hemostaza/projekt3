@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Utwórz komentarz</title>
+</head>
+<body>
+<h1>Utwórz koemntarz</h1>
+<form th:object="${comment}" method="post">
+    <label>Uzytkownik: <input type="text" th:text="*{user}"></label>
+    <label>Komentarz: <input type="text" th:text="*{comment}"></label>
+</form>
+
+</body>
+</html>

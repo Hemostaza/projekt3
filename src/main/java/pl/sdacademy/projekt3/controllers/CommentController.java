@@ -23,7 +23,7 @@ public class CommentController {
     @GetMapping("/list")
     public String getList(ModelMap modelMap){
         List<Comment> comments = commentRepository.findAll();
-        modelMap.addAttribute("comment",comments);
+        modelMap.addAttribute("comments",comments);
         return "/comment/list";
     }
 
@@ -37,4 +37,6 @@ public class CommentController {
         commentRepository.save(comment);
         return "forward:/comment/comment/list";
     }
+
+
 }
