@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj komentarz</title>
+</head>
+<body>
+<h1>Edytuj komentarz</h1>
+<form th:object="${comment}" th:action="@{/comment/edit}" method="post">
+    <label>Uzytkownik: <input type="text" th:field="*{user}"></label>
+    <label>Komentarz: <input type="text" th:field="*{text}"></label>
+    <input type="hidden" th:field="*{id}">
+    <input type="submit">
+</form>
+
+</body>
+</html>

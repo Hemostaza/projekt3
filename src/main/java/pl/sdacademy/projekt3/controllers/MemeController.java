@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping({"/meme","/"})
+@RequestMapping("/meme")
 public class MemeController {
     private final MemeRepository memeRepository;
 

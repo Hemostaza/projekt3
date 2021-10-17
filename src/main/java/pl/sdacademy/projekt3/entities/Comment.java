@@ -23,6 +23,10 @@ public class Comment {
         return text;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public int getMemId() {
         return memId;
     }
