@@ -8,6 +8,7 @@ import pl.sdacademy.projekt3.repositories.MemeRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping({"/meme","/"})
@@ -49,5 +50,11 @@ public class MemeController {
     public String saveEditMeme(Meme meme){
         memeRepository.save(meme);
         return "redirect:/meme/list";
+    }
+    @GetMapping("/list/by-user/{user}")
+    public String getMemesByUser(@PathVariable String user, ModelMap modelMap){
+        List<Meme> memes = memeRepository.findAllByUser(user);
+        modelMap.addAttribute("memes",memes);
+        return "meme/memelist";
     }
 }
