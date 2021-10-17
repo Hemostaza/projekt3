@@ -17,10 +17,10 @@
         <tr th:each="meme : ${memes}">
             <td th:text="${meme.category}"></td>
             <td th:text="${meme.title}"></td>
-            <td><a th:href="@{list/by-id/{id}(id=${meme.id})}" th:text="${meme.description}"></a></td>
+            <td><a th:href="@{/meme/list/by-id/{id}(id=${meme.id})}" th:text="${meme.description}"></a></td>
             <td th:text="${meme.user}"></td>
             <td th:text="${meme.rating}"></td>
-            <td  th:text="${meme.id}">style="visibility:collapse;"</td>
+            <td style="visibility:collapse;" th:text="${meme.id}"></td>
 
         </tr>
     </table>

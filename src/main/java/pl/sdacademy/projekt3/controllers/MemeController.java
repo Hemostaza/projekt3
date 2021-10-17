@@ -7,8 +7,6 @@ import pl.sdacademy.projekt3.entities.Meme;
 import pl.sdacademy.projekt3.repositories.MemeRepository;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/meme")
@@ -62,5 +60,11 @@ public class MemeController {
         Meme meme = memeRepository.getById(id);
         if(meme!=null) modelMap.addAttribute("meme",meme);
         return "meme/meme";
+    }
+    @GetMapping("/list/by-category/{category}")
+    public String getMemesByCategory(@PathVariable String category, ModelMap modelMap){
+        List<Meme> memes = memeRepository.findAllByCategory(category);
+        modelMap.addAttribute("memes",memes);
+        return "meme/memelist";
     }
 }
