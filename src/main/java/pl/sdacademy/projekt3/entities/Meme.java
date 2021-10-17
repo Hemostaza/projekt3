@@ -19,6 +19,10 @@ public class Meme {
     private String description;
     private int rating = 0;
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }

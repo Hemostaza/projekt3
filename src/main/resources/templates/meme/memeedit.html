@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj Mema</title>
+</head>
+<body>
+<h1>Edytuj</h1>
+<form th:object="${meme}" th:action="@{/edit}" method="post">
+    <label>Kategoria: <input type="text" th:field="*{category}"></label>
+    <label>Tytuł: <input type="text" th:field="*{title}"></label>
+    <label>Opis (obrazek): <input type="text" th:field="*{description}"></label>
+    <label>Uzytkownik: <input type="text" th:field="*{user}"></label>
+    <input type="text" th:field="*{id}">
+    <input type="submit">
+</body>
+</html>
