@@ -51,10 +51,16 @@ public class MemeController {
         memeRepository.save(meme);
         return "redirect:/meme/list";
     }
-    @GetMapping("/list/by-user/{user}")
+    @GetMapping("/list/by-user/{id}")
     public String getMemesByUser(@PathVariable String user, ModelMap modelMap){
         List<Meme> memes = memeRepository.findAllByUser(user);
         modelMap.addAttribute("memes",memes);
         return "meme/memelist";
+    }
+    @GetMapping("/list/by-id/{id}")
+    public String getMemesById(@PathVariable Integer id, ModelMap modelMap){
+        Meme meme = memeRepository.getById(id);
+        if(meme!=null) modelMap.addAttribute("meme",meme);
+        return "meme/meme";
     }
 }

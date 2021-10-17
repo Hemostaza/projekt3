@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Meme</title>
+</head>
+<body>
+Title: <strong th:text="${meme.title}"></strong>
+By: <strong><a th:href="@{/user/list}" th:text="${meme.user}"></a></strong>
+<h1 th:text="${meme.description}"></h1>
+<hr>
+<a th:href="@{/meme/edit/by-id/{id}(id=${meme.id})}">Edytuj</a>
+<a th:href="@{/meme/list}">Powrót</a>
+<div>
+    komentarze?
+</div>
+
+</body>
+</html>
