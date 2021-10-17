@@ -24,18 +24,18 @@ public class CommentController {
     public String getList(ModelMap modelMap){
         List<Comment> comments = commentRepository.findAll();
         modelMap.addAttribute("comments",comments);
-        return "/comment/list";
+        return "comment/list";
     }
 
-    @GetMapping("add")
-    public String getForm(@ModelAttribute("comment") Comment comment){
-        return "/comment/form";
-    }
+    @GetMapping("/add")
+    public String addComment(@ModelAttribute("comment") Comment comment){
+        return "comment/form";
+    } //w którym miejscu lepiej zmienić nazwę?
 
     @PostMapping("/add")
-    public String create(Comment comment){
+    public String saveComment(Comment comment){
         commentRepository.save(comment);
-        return "forward:/comment/comment/list";
+        return "redirect:/comment/list";
     }
 
 

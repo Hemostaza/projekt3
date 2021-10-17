@@ -11,9 +11,9 @@
         <th>Użytkownik</th>
         <th>Komenatrz</th>
     </tr>
-    <tr th:each="comment: ${comments}">
+    <tr th:each="comment : ${comments}">
         <td th:text="${comment.user}"></td>
-        <td th:text="${comment.comment}"></td>
+        <td th:text="${comment.text}"></td>
     </tr>
 </table>
 
