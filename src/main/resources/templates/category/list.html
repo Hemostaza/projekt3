@@ -11,7 +11,7 @@
         <th>Nazwa</th>
     </tr>
     <tr th:each="category: ${categories}">
-        <td th:text="${category.name}"></td>
+        <td><a th:href="@{/meme/list/by-category/{category}(category=${category.name})}"  th:text="${category.name}"></a></td>
     </tr>
 </table>
 </body>
