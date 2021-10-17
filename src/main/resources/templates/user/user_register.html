@@ -10,7 +10,9 @@
     <label>Login: <input type="text" th:field="*{login}"></label>
     <label>Hasło: <input type="password" th:field="*{password}"></label>
     <label>E-mail: <input type="text" th:field="*{email}"></label>
-    <input type="submit">
+    <input type="submit" value="Zarejestruj">
 </form>
+<hr>
+<a th:href="@{/}">Powrót</a>
 </body>
 </html>

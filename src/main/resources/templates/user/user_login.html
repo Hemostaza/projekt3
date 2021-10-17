@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zaloguj się</title>
+</head>
+<body>
+<h1>Logowanie użytkownika</h1>
+<form method="post" autocomplete="off" th:action="@{/login}">
+    <label>Nazwa użytkownika: <input type="text" name="username"></label>
+    <label>Hasło: <input type="password" name="password"></label>
+    <input type="submit">
+</form>
+<hr>
+<a th:href="@{/}">Powrót</a>
+</body>
+</html>
