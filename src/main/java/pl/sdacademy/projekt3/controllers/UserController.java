@@ -22,6 +22,6 @@ public class UserController {
     public String getList(ModelMap modelMap) {
         List<User> users = userRepository.findAll();
         modelMap.addAttribute("users", users);
-        return "redirect:/user/user_list";
+        return "/user/user_list";
     }
 }
