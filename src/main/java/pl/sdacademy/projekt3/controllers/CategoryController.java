@@ -3,6 +3,7 @@ package pl.sdacademy.projekt3.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.sdacademy.projekt3.entities.Category;
@@ -33,6 +34,23 @@ public class CategoryController {
 
     @PostMapping("/add")
     public String create(Category category) {
+        categoryRepository.save(category);
+        return "redirect:/category/list";
+    }
+
+    @GetMapping("/edit/by-id/{id}")
+    public String edit(@PathVariable Integer id, ModelMap modelMap) {
+        modelMap.addAttribute("category", categoryRepository.findById(id));
+        return "category/editedlist";
+    }
+    @GetMapping("/delete/by-id/{id}")
+    public String delete(@PathVariable Integer id){
+        categoryRepository.deleteById(id);
+        return "redirect:/category/list";
+    }
+
+    @PostMapping("/edit")
+    public String saveEditedCategory(Category category) {
         categoryRepository.save(category);
         return "redirect:/category/list";
     }
