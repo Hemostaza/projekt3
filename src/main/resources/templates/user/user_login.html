@@ -11,18 +11,17 @@
 </div>
 <form method="post" autocomplete="off" th:action="@{/login}">
     <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Nazwa użytkownika</label>
+        <input type="text" class="form-control" id="floatingInput" placeholder="Nazwa użytkownika">
+        <label for="floatingInput">Nazwa użytkownika:</label>
 
     </div>
-    <div class="form-floating">
+    <div class="form-floating mb-3">
         <input type="password" class="form-control" id="floatingPassword" placeholder="Hasło">
-        <label for="floatingPassword">Hasło</label>
-        <div>
-            <button type="button" class="btn btn-primary">Zaloguj</button>
-        </div>
+        <label for="floatingPassword">Hasło:</label>
     </div>
-
+    <div>
+        <button type="submit" class="btn btn-primary">Zaloguj</button>
+    </div>
 </form>
 <hr>
 <a th:href="@{/}">Powrót</a>

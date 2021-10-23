@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Rejestracja</title>
+    <head th:replace="myFragments :: myHead(title = 'Rejestracja')"></head>
 </head>
 <body>
-<h1>Rejestracja użytkownika</h1>
-<form th:object="${user}" method="post">
-    <label>Login: <input type="text" th:field="*{login}"></label>
-    <label>Hasło: <input type="password" th:field="*{password}"></label>
-    <label>E-mail: <input type="text" th:field="*{email}"></label>
-    <input type="submit" value="Zarejestruj">
+<div class="container">
+<h1>
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+    </svg>
+    Rejestracja użytkownika</h1>
+</div>
+<form th:object="${user}" method="post" autocomplete="off">
+    <div class="form-floating mb-3">
+        <input type="text" required class="form-control" id="floatingInput" placeholder="user1">
+        <label for="floatingInput">Nazwa użytkownika (login):</label>
+
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" required class="form-control" id="floatingPassword" placeholder="Hasło">
+        <label for="floatingPassword">Hasło:</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="email" required class="form-control" id="floatingEmail" placeholder="example@wpl.pl">
+        <label for="floatingPassword">Email:</label>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary" >Zarejestruj</button>
+    </div>
 </form>
 <hr>
 <a th:href="@{/}">Powrót</a>
