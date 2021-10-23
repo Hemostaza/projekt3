@@ -18,13 +18,11 @@ public class MemeController {
         this.memeRepository = memeRepository;
     }
 
-    //@GetMapping("/list")
-    //Model przypisywany przed każdym mappingiem?
-    @ModelAttribute("memelist")
-    public List<Meme> getMemes(ModelMap modelMap){
-//        List<Meme> memes = memeRepository.findAll();
-//        modelMap.addAttribute("memes",memes);
-        return memeRepository.findAll();
+    @GetMapping("/list")
+    public String getMemes(ModelMap modelMap){
+        List<Meme> memes = memeRepository.findAll();
+        modelMap.addAttribute("memes",memes);
+        return "meme/memelist";
     }
 
     @GetMapping("/add")
@@ -52,9 +50,9 @@ public class MemeController {
         memeRepository.save(meme);
         return "redirect:/meme/list";
     }
-    @GetMapping("/list/by-user/{id}")
-    public String getMemesByUser(@PathVariable String user, ModelMap modelMap){
-        List<Meme> memes = memeRepository.findAllByUser(user);
+    @GetMapping("/list/by-user/{login}")
+    public String getMemesByUser(@PathVariable String login, ModelMap modelMap){
+        List<Meme> memes = memeRepository.findAllByUser(login);
         modelMap.addAttribute("memes",memes);
         return "meme/memelist";
     }
@@ -90,7 +88,8 @@ public class MemeController {
         return "redirect:/";
     }
 
-    public void test(){
-        System.out.println("wtf?");
+    @ModelAttribute("memelist")
+    public List<Meme> getMemeList(){
+        return memeRepository.findAll();
     }
 }
