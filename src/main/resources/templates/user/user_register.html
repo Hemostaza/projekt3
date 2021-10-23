@@ -14,17 +14,17 @@
 </div>
 <form th:object="${user}" method="post" autocomplete="off">
     <div class="form-floating mb-3">
-        <input type="text" required class="form-control" id="floatingInput" placeholder="user1">
+        <input type="text" th:field="*{login}" required class="form-control" id="floatingInput" placeholder="user1">
         <label for="floatingInput">Nazwa użytkownika (login):</label>
 
     </div>
     <div class="form-floating mb-3">
-        <input type="password" required class="form-control" id="floatingPassword" placeholder="Hasło">
+        <input type="password" th:field="*{password}" required class="form-control" id="floatingPassword" placeholder="Hasło">
         <label for="floatingPassword">Hasło:</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="email" required class="form-control" id="floatingEmail" placeholder="example@wpl.pl">
-        <label for="floatingPassword">Email:</label>
+        <input type="email" th:field="*{email}" required class="form-control" id="floatingEmail" placeholder="example@wpl.pl">
+        <label for="floatingEmail">Email:</label>
     </div>
     <div>
         <button type="submit" class="btn btn-primary" >Zarejestruj</button>
