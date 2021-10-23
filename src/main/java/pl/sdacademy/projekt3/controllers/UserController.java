@@ -37,19 +37,48 @@ public class UserController {
     }
 
     @GetMapping("/delete/by-id/{id}")
-    public String deleteUser(@PathVariable Integer id){
+    public String deleteUser(@PathVariable Integer id) {
         userRepository.deleteById(id);
         return "redirect:/user/list";
     }
 
+    @GetMapping("/delete/by-user/{user}")
+    public String deleteUser(@PathVariable String user) {
+        User byLogin = userRepository.findByLogin(user);
+        userRepository.delete(byLogin);
+        return "redirect:/user/list";
+    }
+
     @GetMapping("/edit/by-id/{id}")
-    public String editUser(@PathVariable Integer id, ModelMap modelMap){
-        modelMap.addAttribute("user",userRepository.findById(id));
+    public String editUser(@PathVariable Integer id, ModelMap modelMap) {
+        modelMap.addAttribute("user", userRepository.findById(id));
         return "user/user_edit";
     }
+
+    @GetMapping("/edit/by-user/{user}")
+    public String editUser(@PathVariable String user, ModelMap modelMap) {
+        modelMap.addAttribute("user", userRepository.findByLogin(user));
+        return "user/user_edit";
+    }
+
     @PostMapping("/edit")
-    public String saveEditUser(User user){
+    public String saveEditUser(User user) {
         userRepository.save(user);
         return "redirect:/user/list";
+    }
+
+
+
+    //STRONA UZYTKOWNIKA
+    //komentarze użytkownika
+    //memy użytkownika
+    //odnosniki do edycji komentarzy/memów
+    //odnosnik do usunięcie konta
+
+    @GetMapping("/{user}")
+    public String userMems(@PathVariable String user, ModelMap modelMap) {
+modelMap.addAttribute("login",userRepository.findByLogin(user));
+
+        return "user/userPage";
     }
 }
