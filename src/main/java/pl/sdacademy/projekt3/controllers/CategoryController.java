@@ -2,16 +2,14 @@ package pl.sdacademy.projekt3.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.projekt3.entities.Category;
 import pl.sdacademy.projekt3.repositories.CategoryRepository;
 
 import java.util.List;
 
 @Controller
+@ControllerAdvice
 @RequestMapping("/category")
 public class CategoryController {
     private final CategoryRepository categoryRepository;
@@ -20,11 +18,13 @@ public class CategoryController {
         this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping("/list")
-    public String getAll(ModelMap modelMap) {
-        List<Category> categories = categoryRepository.findAll();
-        modelMap.addAttribute("categories", categories);
-        return "category/list";
+//    @GetMapping("/list")
+    @ModelAttribute ("categorylist")
+    public List<Category> getAllCategories(ModelMap modelMap) {
+//        List<Category> categories = categoryRepository.findAll();
+//        modelMap.addAttribute("categories", categories);
+//        return "category/list";
+        return categoryRepository.findAll();
     }
 
     @GetMapping("/add")
@@ -35,7 +35,7 @@ public class CategoryController {
     @PostMapping("/add")
     public String create(Category category) {
         categoryRepository.save(category);
-        return "redirect:/category/list";
+        return "redirect:/";
     }
 
     @GetMapping("/edit/by-id/{id}")
@@ -46,12 +46,12 @@ public class CategoryController {
     @GetMapping("/delete/by-id/{id}")
     public String delete(@PathVariable Integer id){
         categoryRepository.deleteById(id);
-        return "redirect:/category/list";
+        return "redirect:/";
     }
 
     @PostMapping("/edit")
     public String saveEditedCategory(Category category) {
         categoryRepository.save(category);
-        return "redirect:/category/list";
+        return "redirect:/";
     }
 }

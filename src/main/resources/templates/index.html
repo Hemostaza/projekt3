@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Mems</title>
+    <title>Memes</title>
 </head>
 <body>
 <h1>Witaj na stronie memów!</h1>
-<div th:insert="meme/memelist.html :: memes"></div>
-
-<span sec:authorize="isAnonymous()">
+<span>
     <a th:href="@{/login}">Zaloguj się</a>
     <a th:href="@{/user/register}">Zarejestruj się</a>
 </span>
+<h1>Kategorie</h1>
+<div th:insert="category/list.html :: categories"></div>
+<h1>Memy</h1>
+<div th:insert="meme/memelist.html :: memes"></div>
 </body>
 </html>
