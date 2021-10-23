@@ -13,6 +13,6 @@
 <h1>Kategorie</h1>
 <div th:insert="category/list.html :: categories"></div>
 <h1>Memy</h1>
-<div th:insert="meme/memelist.html :: memes"></div>
+<div th:insert="meme/memelist.html :: memeListFragment(memes = ${memelist})"></div>
 </body>
 </html>
