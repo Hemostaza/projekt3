@@ -33,7 +33,7 @@ public class UserController {
     @PostMapping("/register")
     public String registerUser(User user) {
         userRepository.save(user);
-        return "redirect:/user/list";
+        return "user/user_register_result";
     }
 
     @GetMapping("/delete/by-id/{id}")
