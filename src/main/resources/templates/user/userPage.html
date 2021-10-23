@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona Użytkownika</title>
+</head>
+<body>
+<h1>Strona Uzytkownika</h1>
+<tr>
+    <th>Login: <td th:text="${login.login}"></td></th>
+    <p></p>
+    <th>E-mail: <td th:text="${login.email}"></td></th>
+    <p></p>
+    <th>Komentarze: <td th:text="${login.email}"></td></th>
+    <p></p>
+    <a th:href="@{edit/by-user/{user}(user=${login.login})}">Edycja konta</a>
+    <p></p>
+    <a th:href="@{delete/by-user/{user}(user=${login.login})}">Usuwanie konta</a>
+    <p></p>
+
+</tr>
+<p></p>
+
+
+</body>
+</html>
