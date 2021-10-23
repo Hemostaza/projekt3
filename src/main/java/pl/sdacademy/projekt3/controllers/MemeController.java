@@ -67,4 +67,27 @@ public class MemeController {
         modelMap.addAttribute("memes",memes);
         return "meme/memelist";
     }
+    @GetMapping("/button/test")
+    public void doStuffMethod() {
+        System.out.println("Success");
+    }
+
+    @GetMapping("/upvote/{id}")
+    public String upvote(Meme meme){
+        Meme meme1 = memeRepository.getById(meme.getId());
+        meme1.setRating(meme1.getRating()+1);
+        memeRepository.save(meme1);
+        return "redirect:/";
+    }
+    @GetMapping("/downvote/{id}")
+    public String downvote(Meme meme){
+        Meme meme1 = memeRepository.getById(meme.getId());
+        meme1.setRating(meme1.getRating()-1);
+        memeRepository.save(meme1);
+        return "redirect:/";
+    }
+
+    public void test(){
+        System.out.println("wtf?");
+    }
 }

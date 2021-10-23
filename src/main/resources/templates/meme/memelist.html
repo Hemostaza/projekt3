@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>Memy:</h1>
+<div th:fragment="memes">
     <table>
         <tr>
             <th>Kategoria</th>
@@ -14,15 +15,19 @@
             <th>Użytkownik</th>
             <th>Ocena</th>
         </tr>
-        <tr th:each="meme : ${memes}">
+        <tr th:each="meme : ${memelist}">
             <td th:text="${meme.category}"></td>
             <td th:text="${meme.title}"></td>
             <td><a th:href="@{/meme/list/by-id/{id}(id=${meme.id})}" th:text="${meme.description}"></a></td>
             <td th:text="${meme.user}"></td>
             <td th:text="${meme.rating}"></td>
+            <td><a th:href="@{/meme/upvote/{id}(id=${meme.id})}">Upvote</a></td>
+            <td><a th:href="@{/meme/downvote/{id}(id=${meme.id})}">Downvote</a></td>
             <td style="visibility:collapse;" th:text="${meme.id}"></td>
+
 
         </tr>
     </table>
+</div>
 </body>
 </html>
