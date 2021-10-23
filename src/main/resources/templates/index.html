@@ -6,6 +6,8 @@
 </head>
 <body>
 <h1>Witaj na stronie memów!</h1>
+<div th:insert="meme/memelist.html :: memes"></div>
+
 <span sec:authorize="isAnonymous()">
     <a th:href="@{/login}">Zaloguj się</a>
     <a th:href="@{/user/register}">Zarejestruj się</a>

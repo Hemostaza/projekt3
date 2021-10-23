@@ -9,6 +9,7 @@ import pl.sdacademy.projekt3.repositories.MemeRepository;
 import java.util.List;
 
 @Controller
+@ControllerAdvice
 @RequestMapping("/meme")
 public class MemeController {
     private final MemeRepository memeRepository;
@@ -17,11 +18,13 @@ public class MemeController {
         this.memeRepository = memeRepository;
     }
 
-    @GetMapping("/list")
-    public String getMemes(ModelMap modelMap){
-        List<Meme> memes = memeRepository.findAll();
-        modelMap.addAttribute("memes",memes);
-        return "meme/memelist";
+    //@GetMapping("/list")
+    //Model przypisywany przed każdym mappingiem?
+    @ModelAttribute("memelist")
+    public List<Meme> getMemes(ModelMap modelMap){
+//        List<Meme> memes = memeRepository.findAll();
+//        modelMap.addAttribute("memes",memes);
+        return memeRepository.findAll();
     }
 
     @GetMapping("/add")
