@@ -3,7 +3,7 @@
 <head th:replace="myFragments :: myHead(title='Memes')">
 </head>
 <body>
-<h1>Memy:</h1>
+<div th:insert="myFragments :: navigationBar"></div>
 <div th:fragment="memeListFragment" class="container">
     <table>
         <tr th:each="meme : ${memes}">

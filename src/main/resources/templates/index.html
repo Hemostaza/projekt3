@@ -3,14 +3,13 @@
 <head th:replace="myFragments :: myHead(title='Strona główna')">
 </head>
 <body>
-<h1>Witaj na stronie memów!</h1>
+<div th:replace="myFragments :: navigationBar"></div>
+<!--
 <span>
     <a th:href="@{/login}">Zaloguj się</a>
     <a th:href="@{/user/register}">Zarejestruj się</a>
 </span>
-<h1>Kategorie</h1>
-<div th:insert="category/list.html :: categories"></div>
-<h1>Memy</h1>
+-->
 <div th:insert="meme/memelist.html :: memeListFragment(memes = ${memelist})"></div>
 </body>
 </html>
