@@ -1,6 +1,10 @@
 package pl.sdacademy.projekt3.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Meme {
@@ -17,6 +21,8 @@ public class Meme {
     //Później obrazek
     private String description;
     private int rating = 0;
+    @ElementCollection
+    private List<EmbededComment> comments = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -63,5 +69,13 @@ public class Meme {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public List<EmbededComment> getComments(){
+        return comments;
+    }
+
+    public void setComments(EmbededComment comment) {
+        this.comments.add(comment);
     }
 }

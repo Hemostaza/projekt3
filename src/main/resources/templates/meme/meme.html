@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="myFragments :: myHead(title = 'Memy')"></head>
+<head th:replace="myFragments :: myHead(title = ${meme.title})"></head>
 <body>
-Title: <strong th:text="${meme.title}"></strong>
-By: <strong><a th:href="@{/user/list}" th:text="${meme.user}"></a></strong>
-<h1 th:text="${meme.description}"></h1>
-<hr>
+<div th:replace="myFragments :: navigationBar"> </div>
+
+<div th:insert="meme/memelist.html :: memeListFragment(memes = ${meme})"></div>
+
 <a th:href="@{/meme/edit/by-id/{id}(id=${meme.id})}">Edytuj</a>
 <a th:href="@{/meme/list}">Powrót</a>
-<div>
-    komentarze?
-</div>
+
+<!--dodawanie komentarzy -->
+
+
+<!--wyświetlanie komentarzy -->
+<ul>
+    <li th:each="comment : ${meme.comments}"><p th:text="${comment.text}"></p></li>
+</ul>
+
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>
 </html>
