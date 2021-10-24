@@ -1,9 +1,6 @@
 package pl.sdacademy.projekt3.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Comment {
@@ -11,11 +8,12 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String user; //String później zamienić na User
+    @ManyToOne
+    private User user;
     private String text; //ok,
     private int memId;
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -35,7 +33,7 @@ public class Comment {
         this.id = id;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

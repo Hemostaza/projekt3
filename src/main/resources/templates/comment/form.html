@@ -3,10 +3,13 @@
 <head th:replace="myFragments :: myHead(title = 'Nowy komentarz')"></head>
 <body>
 <h1>Utwórz komentarz</h1>
-<form th:object="${comment}" method="post">
-    <label>Użytkownik: <input type="text" th:field="*{user}"></label>
+<form th:object="${comment}" method="post" autocomplete="off">
+    <label>Użytkownik:</label>
+    <select th:field="*{user}">
+        <option th:each="user: ${users}" th:value="${user.id}"th:text="${user.login}"></option>
+    </select>
     <label>Komentarz: <input type="text" th:field="*{text}"></label>
-    <input type="submit">
+    <input type="submit" value="Dodaj">
 </form>
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>

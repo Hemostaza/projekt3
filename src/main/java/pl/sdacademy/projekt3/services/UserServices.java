@@ -1,10 +1,12 @@
 package pl.sdacademy.projekt3.services;
 
 import org.springframework.stereotype.Service;
+import pl.sdacademy.projekt3.entities.Comment;
 import pl.sdacademy.projekt3.entities.User;
 import pl.sdacademy.projekt3.repositories.MemeRepository;
 import pl.sdacademy.projekt3.repositories.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +23,9 @@ public class UserServices {
 
     public void addComment(){
 
+    }
+    public List<User> findAll(){
+        return userRepository.findAll();
     }
 
 }
