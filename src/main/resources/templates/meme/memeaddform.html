@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Dodaj meme</title>
+<head th:replace="myFragments :: myHead(title='Dodaj mema')">
 </head>
 <body>
-<h1>Dodaj meme</h1>
-<form th:object="${meme}" method="post">
-    <label>Kategoria: <input type="text" th:field="*{category}"></label>
-    <label>Tytuł: <input type="text" th:field="*{title}"></label>
-    <label>Opis (obrazek): <input type="text" th:field="*{description}"></label>
-    <label>Uzytkownik: <input type="text" th:field="*{user}"></label>
-    <input type="submit">
-</form>
+<div th:replace="myFragments::navigationBar"></div>
+
+<div class="container">
+  <form th:object="${meme}" method="post">
+    <div class="row g-3">
+      <div class="col">
+        <label for="inputImg" class="form-label">Obraz</label>
+        <input id="inputImg" type="text" class="form-control" placeholder="Opis" aria-label="Obrazek" th:field="*{description}">
+      </div>
+      <div class="col">
+        <label for="inputTitle" class="form-label">Tytuł</label>
+        <input id="inputTitle" type="text" class="form-control" placeholder="Niech będzie zabawnie" aria-label="Tytuł" th:field="*{title}">
+      </div>
+      <div class="col">
+        <label for="inputCategory" class="form-label">Kategoria</label>
+        <select id="inputCategory" class="form-select" th:field="*{category}">
+          <option th:each="category : ${categorylist}" th:value="${category.name}" ><p th:text="${category.name}"></p></option>
+        </select>
+      </div>
+    </div>
+    <!-- na chwile obecną tlyko jeden user dodaje mema -->
+    <input type="hidden" name="user" value="User1">
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Dodaj Mema</button>
+    </div>
+  </form>
+</div>
+
 </body>
 </html>
