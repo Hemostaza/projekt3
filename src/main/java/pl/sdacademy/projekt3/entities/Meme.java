@@ -1,9 +1,6 @@
 package pl.sdacademy.projekt3.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Meme {
@@ -14,7 +11,9 @@ public class Meme {
     //relacja do kategorii
     private String category;
     //relacja do użytkownika dodającego mema
-    private String user;
+    //wiele memów od jednego użytkownika
+    @ManyToOne
+    private User user;
     //Później obrazek
     private String description;
     private int rating = 0;
@@ -30,7 +29,7 @@ public class Meme {
         return category;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -54,7 +53,7 @@ public class Meme {
         this.category = category;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

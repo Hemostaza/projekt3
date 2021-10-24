@@ -6,7 +6,7 @@
 <div th:replace="myFragments::navigationBar"></div>
 
 <div class="container">
-  <form th:object="${meme}" method="post">
+  <form th:object="${meme}" method="post" th:action="@{/meme/add}">
     <div class="row g-3">
       <div class="col">
         <label for="inputImg" class="form-label">Obraz</label>
@@ -24,7 +24,7 @@
       </div>
     </div>
     <!-- na chwile obecną tlyko jeden user dodaje mema -->
-    <input type="hidden" name="user" value="User1">
+    <input type="hidden" name="user" th:value="${userById.getId()}">
     <div class="col-12">
       <button type="submit" class="btn btn-primary">Dodaj Mema</button>
     </div>

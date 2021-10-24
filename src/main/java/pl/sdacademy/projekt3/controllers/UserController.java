@@ -3,8 +3,9 @@ package pl.sdacademy.projekt3.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import pl.sdacademy.projekt3.entities.Meme;
 import pl.sdacademy.projekt3.entities.User;
+import pl.sdacademy.projekt3.repositories.CommentRepository;
+import pl.sdacademy.projekt3.repositories.MemeRepository;
 import pl.sdacademy.projekt3.repositories.UserRepository;
 
 import java.util.List;
@@ -13,9 +14,13 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
+    private final MemeRepository memeRepository;
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, CommentRepository commentRepository, MemeRepository memeRepository) {
         this.userRepository = userRepository;
+        this.commentRepository = commentRepository;
+        this.memeRepository = memeRepository;
     }
 
     @GetMapping("/list")
@@ -78,6 +83,8 @@ public class UserController {
     @GetMapping("/{user}")
     public String userMems(@PathVariable String user, ModelMap modelMap) {
 modelMap.addAttribute("login",userRepository.findByLogin(user));
+modelMap.addAttribute("userComment", commentRepository.findByUser(user));
+modelMap.addAttribute("userMeme",memeRepository.findAllByUser(user));
 
         return "user/userPage";
     }
