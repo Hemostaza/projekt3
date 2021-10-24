@@ -10,7 +10,7 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <a th:href="@{/meme/list/by-id/{id}(id=${meme.id})}" ><h5 class="card-title" th:text="${meme.title}">Card title</h5></a>
-                    <h6 class="card-subtitle mb-2 text-muted" th:text="${meme.user}">Card subtitle</h6>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="${meme.user.login}">Card subtitle</h6>
                     <p><a class="card-text" th:href="@{/meme/list/by-id/{id}(id=${meme.id})}" th:text="${meme.description}"></a></p>
                     <a th:href="@{/meme/list/by-category/{category}(category=${meme.category})}" class="card-link" th:text="${meme.category}" >Card link</a>
                     <b th:text="${meme.rating}"></b>
