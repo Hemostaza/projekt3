@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista kategorii</title>
-</head>
+<head th:replace="myFragments :: myHead(title='Lista kategorii')"></head>
 <body>
-<h1>Lista kategorii</h1>
+<h1>Lista kategorii:</h1>
 <div th:fragment="categories">
 <table>
-    <tr>
-        <th>Nazwa</th>
-    </tr>
     <tr th:each="category: ${categorylist}">
         <td><a th:href="@{/meme/list/by-category/{category}(category=${category.name})}"  th:text="${category.name}"></a></td>
     </tr>

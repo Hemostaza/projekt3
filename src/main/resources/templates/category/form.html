@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Dodaj nową kategorię</title>
+    <head th:replace="myFragments :: myHead(title = 'Nowa kategoria')"></head>
 </head>
 <body>
 <h1>Dodaj nową kategorię</h1>
-<form method="post" autocomplete="off">
-    <div>
-        <label>Nazwa: <input type="text" required name="name"></label>
-        <input type="submit" value="Dodaj">
-    </div>
-</form>
+    <form th:object="${category}" method="post" autocomplete="off">
+        <form class="row g-3">
+            <div class="col-auto">
+                <label for="nowakategoriaid" class="visually-hidden">Kategoria</label>
+                <input type="text" readonly class="form-control-plaintext" id="nowakategoriaid" value="Nazwa Kategorii">
+            </div>
+            <div class="col-auto">
+                <label for="kategoriaid" class="visually-hidden">Nazwa kategorii</label>
+                <input type="text" th:field="*{name}" class="form-control" id="kategoriaid" placeholder="Kategoria">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Dodaj</button>
+            </div>
+        </form>
+
+    </form>
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>
 </html>

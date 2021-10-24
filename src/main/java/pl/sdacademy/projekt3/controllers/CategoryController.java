@@ -18,17 +18,20 @@ public class CategoryController {
         this.categoryRepository = categoryRepository;
     }
 
-//    @GetMapping("/list")
+    @GetMapping("/list")
+    public String getCategories(ModelMap modelMap) {
+        List<Category> categories = categoryRepository.findAll();
+        modelMap.addAttribute("categories", categories);
+        return "category/list";
+    }
+
     @ModelAttribute ("categorylist")
-    public List<Category> getAllCategories(ModelMap modelMap) {
-//        List<Category> categories = categoryRepository.findAll();
-//        modelMap.addAttribute("categories", categories);
-//        return "category/list";
+    public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
 
     @GetMapping("/add")
-    public String getForm() {
+    public String getForm(@ModelAttribute("category") Category category) {
         return "category/form";
     }
 
