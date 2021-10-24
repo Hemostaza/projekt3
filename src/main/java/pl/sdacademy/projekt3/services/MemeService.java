@@ -33,4 +33,8 @@ public class MemeService {
     public Optional<Meme> findById(int id){
         return memeRepository.findById(id);
     }
+
+    public List<Meme> findAllByUserId(int id){
+        return memeRepository.findAllByUser_Id(id);
+    }
 }

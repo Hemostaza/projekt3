@@ -7,6 +7,7 @@ import pl.sdacademy.projekt3.entities.User;
 import pl.sdacademy.projekt3.repositories.CommentRepository;
 import pl.sdacademy.projekt3.repositories.MemeRepository;
 import pl.sdacademy.projekt3.repositories.UserRepository;
+import pl.sdacademy.projekt3.services.MemeService;
 
 import java.util.List;
 
@@ -15,12 +16,12 @@ import java.util.List;
 public class UserController {
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
-    private final MemeRepository memeRepository;
+    private final MemeService memeService;
 
-    public UserController(UserRepository userRepository, CommentRepository commentRepository, MemeRepository memeRepository) {
+    public UserController(UserRepository userRepository, CommentRepository commentRepository, MemeService memeService) {
         this.userRepository = userRepository;
         this.commentRepository = commentRepository;
-        this.memeRepository = memeRepository;
+        this.memeService = memeService;
     }
 
     @GetMapping("/list")
@@ -82,9 +83,12 @@ public class UserController {
 
     @GetMapping("/{user}")
     public String userMems(@PathVariable String user, ModelMap modelMap) {
-modelMap.addAttribute("login",userRepository.findByLogin(user));
+        //Znalezienie użytkownika na podstawie adresu {user}
+        User userObj = userRepository.findByLogin(user);
+modelMap.addAttribute("login",userObj);
 modelMap.addAttribute("userComment", commentRepository.findByUser(user));
-modelMap.addAttribute("userMeme",memeRepository.findAllByUser(user));
+//znalezienie memów konkretnego użytkownika z id obiektu użytkownika
+modelMap.addAttribute("userMeme",memeService.findAllByUserId(userObj.getId()));
 
         return "user/userPage";
     }
