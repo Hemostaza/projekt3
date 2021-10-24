@@ -41,6 +41,14 @@ public class CommentController {
         return "redirect:/comment/list";
     }
 
+    @GetMapping("/by-user/{user}")
+    public String commentByUser(@PathVariable String user, ModelMap modelMap){
+        //commentRepository.findByUser(user);
+        List<Comment> comments = commentRepository.findByUser(user);
+        modelMap.addAttribute("comments",comments);
+        return "comment/list";
+    }
+
 //    @GetMapping("/delete/by-user/{user}")
 //    public String deleteCommentByUser(@PathVariable String user){
 //        int id = commentRepository.
