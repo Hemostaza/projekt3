@@ -7,5 +7,7 @@ import java.util.List;
 
 
 public interface CommentRepository extends JpaRepository<Comment,Integer> {
+    List<Comment> findByUser (String user);
+    List<Comment> getAllByUser(String user);
 
 }

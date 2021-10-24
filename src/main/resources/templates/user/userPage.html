@@ -17,10 +17,34 @@
     <p></p>
     <a th:href="@{delete/by-user/{user}(user=${login.login})}">Usuwanie konta</a>
     <p></p>
+    <h1>Lista komentarzy</h1>
+    <table>
+        <tr>
+            <th>Autor</th>
+            <th>Komentarz</th>
+        </tr>
+        <tr th:each="comment : ${userComment}">
+            <td th:text="${comment.user}"></td>
+            <td th:text="${comment.text}"></td>
+
+        </tr>
+    </table>
+    <h1>Lista memów</h1>
+    <table>
+        <tr>
+            <th>Autor</th>
+            <th>Mem</th>
+        </tr>
+        <tr th:each="meme : ${userMeme}">
+            <td th:text="${meme.user}"></td>
+            <td th:text="${meme.getDescription()}"></td>
+
+        </tr>
+    </table>
 
 </tr>
 <p></p>
 
-
+<footer th:replace="myFragments :: myFooter"></footer>
 </body>
 </html>
