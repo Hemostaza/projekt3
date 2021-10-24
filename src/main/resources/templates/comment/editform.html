@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edytuj komentarz</title>
-</head>
+<head th:replace="myFragments :: myHead(title = 'Edycja komentarza')"></head>
 <body>
 <h1>Edytuj komentarz</h1>
 <form th:object="${comment}" th:action="@{/comment/edit}" method="post">

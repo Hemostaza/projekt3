@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Meme</title>
-</head>
+<head th:replace="myFragments :: myHead(title = 'Memy')"></head>
 <body>
 Title: <strong th:text="${meme.title}"></strong>
 By: <strong><a th:href="@{/user/list}" th:text="${meme.user}"></a></strong>
