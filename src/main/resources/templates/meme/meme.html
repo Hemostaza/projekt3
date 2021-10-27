@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="myFragments :: myHead(title = ${meme.title})"></head>
 <body>
-<div th:replace="myFragments :: navigationBar"> </div>
+<div th:replace="myFragments :: navigationBar"></div>
 
 <div th:insert="meme/memelist.html :: memeListFragment(memes = ${meme})"></div>
 
@@ -10,12 +10,30 @@
 <a th:href="@{/meme/list}">Powrót</a>
 
 <!--dodawanie komentarzy -->
+<div class="container">
+    <div style="width: 50rem;">
+      <form th:object="${comment}" method="post">
+        <p th:text="*{id}"></p>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{text}"></textarea>
+        <input type="submit">
+      </form>
+    </div>
+  </div>
+</div>
 
-
-<!--wyświetlanie komentarzy -->
-<ul>
-    <li th:each="comment : ${meme.comments}"><p th:text="${comment.text}"></p></li>
-</ul>
+<!--wyświetlanie komentarzy  -->
+<div class="container">
+<table class="col-3">
+  <tr th:each="comment : ${meme.comments}">
+    <div class="card" style="width: 50rem;">
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted" th:text="${comment.user}"></h6>
+        <p class="card-text" th:text="${comment.text}"></p>
+      </div>
+    </div>
+  </tr>
+</table>
+</div>
 
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>

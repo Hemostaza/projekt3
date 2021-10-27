@@ -1,4 +1,4 @@
-package pl.sdacademy.projekt3.entities;
+package trash;
 
 import javax.persistence.Embeddable;
 
