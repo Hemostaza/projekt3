@@ -9,6 +9,8 @@ import pl.sdacademy.projekt3.repositories.MemeRepository;
 import pl.sdacademy.projekt3.repositories.UserRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -43,6 +45,9 @@ public class UserServices {
         //zapisanie mema
         memeRepository.save(meme);
 
+    }
+    public List<User> findAll(){
+        return userRepository.findAll();
     }
 
 }

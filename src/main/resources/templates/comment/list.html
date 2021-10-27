@@ -9,7 +9,7 @@
         <th>Komentarz</th>
     </tr>
     <tr th:each="comment : ${comments}">
-        <td th:text="${comment.user}"></td>
+        <td th:text="${comment.user.login}"></td>
         <td th:text="${comment.text}"></td>
     </tr>
 </table>

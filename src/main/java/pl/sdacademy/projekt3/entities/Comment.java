@@ -8,11 +8,12 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String userr; //String później zamienić na User
+    @ManyToOne
+    private User user;
     private String text; //ok,
 
-    public String getUser() {
-        return userr;
+    public User getUser() {
+        return user;
     }
 
     public String getText() {
@@ -27,8 +28,8 @@ public class Comment {
         this.id = id;
     }
 
-    public void setUser(String user) {
-        this.userr = user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setText(String text) {
