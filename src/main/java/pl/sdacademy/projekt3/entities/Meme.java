@@ -16,7 +16,11 @@ public class Meme {
     @ManyToOne
     private User user;
     //Później obrazek
-    private String description;
+    private String alternateText;
+    //Tutaj obrazek
+    @Lob
+    private byte[] image;
+
     private int rating = 0;
     //jeden mem do wielu koemntarzy
     //wiele komenarzy do jednego mema
@@ -26,6 +30,7 @@ public class Meme {
     public Integer getId() {
         return id;
     }
+
     public String getTitle() {
         return title;
     }
@@ -38,8 +43,8 @@ public class Meme {
         return user;
     }
 
-    public String getDescription() {
-        return description;
+    public String getAlternateText() {
+        return alternateText;
     }
 
     public int getRating() {
@@ -62,8 +67,8 @@ public class Meme {
         this.user = user;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAlternateText(String alternateText) {
+        this.alternateText = alternateText;
     }
 
     public void setRating(int rating) {
@@ -77,5 +82,13 @@ public class Meme {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

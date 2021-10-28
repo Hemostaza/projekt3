@@ -13,8 +13,7 @@
 <div class="container">
     <div style="width: 50rem;">
       <form th:object="${comment}" method="post">
-        <p th:text="*{id}"></p>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{text}"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{text}"> </textarea>
         <input type="submit">
       </form>
     </div>

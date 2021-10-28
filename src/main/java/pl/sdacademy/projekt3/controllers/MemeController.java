@@ -2,13 +2,18 @@ package pl.sdacademy.projekt3.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.sdacademy.projekt3.entities.Comment;
 import pl.sdacademy.projekt3.entities.Meme;
 import pl.sdacademy.projekt3.repositories.CommentRepository;
 import pl.sdacademy.projekt3.services.MemeService;
 import pl.sdacademy.projekt3.services.UserServices;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 @Controller
@@ -25,6 +30,24 @@ public class MemeController {
         this.commentRepository = commentRepository;
     }
 
+    //Pobranie z bazy danych obrazka w celu wyświetlenia go
+    @GetMapping("/download/{id}")
+    public void downloadImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
+        //Mem ktory chce wysweitlic obrazek
+        Meme meme = memeService.findById(id);
+        //przypisanie obrazka z bazy danych do tablicy
+        byte[] image = meme.getImage();
+        //Wynik z http responsa
+        response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM.getType());
+        response.setHeader("Image", "Meme title =" + meme.getTitle());
+        response.setContentLength(image.length);
+        //wypisanie obrazka
+        OutputStream outputStream = response.getOutputStream();
+        outputStream.write(image, 0, image.length);
+        outputStream.close();
+
+    }
+
     @GetMapping("/list")
     public String getMemes(ModelMap modelMap) {
         List<Meme> memes = memeService.findAll();
@@ -39,8 +62,8 @@ public class MemeController {
     }
 
     @PostMapping("/add")
-    public String saveMeme(Meme meme) {
-        memeService.save(meme);
+    public String saveMeme(Meme meme, @RequestParam("file") MultipartFile file) {
+        memeService.save(meme, file);
         return "redirect:/meme/list";
     }
 
@@ -69,6 +92,7 @@ public class MemeController {
 //        modelMap.addAttribute("memes",memes);
 //        return "meme/memelist";
 //    }
+
     @GetMapping("/list/by-id/{memeId}")
     public String getMemesById(@ModelAttribute("comment") Comment comment, @PathVariable Integer memeId, ModelMap modelMap) {
         Meme meme = memeService.findById(memeId);
@@ -77,14 +101,16 @@ public class MemeController {
     }
 
     @PostMapping("/list/by-id/{memeId}")
-    public String addComment(Comment comment, @PathVariable Integer memeId) {
+    public String addComment(Comment comment, @PathVariable Integer memeId, ModelMap modelMap) {
         userServices.addComment(comment, memeId);
-        return "redirect:/";
+        modelMap.addAttribute("meme", memeService.findById(memeId));
+        return "redirect:/meme/list/by-id/{memeId}";
     }
+
     @GetMapping("/list/by-category/{category}")
-    public String getMemesByCategory(@PathVariable String category, ModelMap modelMap){
+    public String getMemesByCategory(@PathVariable String category, ModelMap modelMap) {
         List<Meme> memes = memeService.findAllByCategory(category);
-        modelMap.addAttribute("memes",memes);
+        modelMap.addAttribute("memes", memes);
         return "meme/memelist";
     }
 //    @GetMapping("/upvote/{id}")

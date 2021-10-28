@@ -10,7 +10,7 @@ public class Comment {
     private Integer id;
     @ManyToOne
     private User user;
-    private String text; //ok,
+    private String text; //ok
 
     public User getUser() {
         return user;
