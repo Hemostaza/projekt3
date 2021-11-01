@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <head th:replace="myFragments :: myHead(title = 'Zarejestrowano użytkownika')"></head>
+  <head th:replace="myFragments :: myHead(title = 'Zarejestrowano użytkownika')"></head>
 </head>
 <body>
 <form method="post" autocomplete="off" th:action="@{/user/register}">
-    <div class="container-fluid">
-        <div class="alert alert-success">Pomyślnie zarejestrowano użytkownika!</div>
-    </div>
+  <div class="container-fluid">
+    <div class="alert alert-success">Pomyślnie zarejestrowano użytkownika!</div>
+  </div>
 </form>
 <hr>
 <a th:href="@{/}">Powrót</a>
