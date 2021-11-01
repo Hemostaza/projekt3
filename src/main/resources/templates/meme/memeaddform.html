@@ -10,13 +10,13 @@
     <div class="row g-3">
       <div class="col">
         <label for="inputImg" class="form-label">Obraz</label>
-        <input id="inputImg" type="file" class="form-control"
+        <input id="inputImg" type="file" required class="form-control"
                placeholder="Opis" aria-label="Obrazek" name="file"
                accept="image/png, image/jpeg, image/jpg">
       </div>
       <div class="col">
         <label for="inputTitle" class="form-label">Tytuł</label>
-        <input id="inputTitle" type="text" class="form-control" placeholder="Niech będzie zabawnie" aria-label="Tytuł" th:field="*{title}">
+        <input id="inputTitle" type="text" required class="form-control" placeholder="Niech będzie zabawnie" aria-label="Tytuł" th:field="*{title}">
       </div>
       <div class="col">
         <label for="inputCategory" class="form-label">Kategoria</label>
