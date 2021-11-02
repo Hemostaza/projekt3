@@ -6,19 +6,31 @@
 <div th:replace="myFragments::navigationBar"></div>
 
 <div class="container">
-  <form th:object="${meme}" method="post" th:action="@{/meme/add}" enctype="multipart/form-data">
-    <div class="row g-3">
-      <div class="col">
-        <label for="inputImg" class="form-label">Obraz</label>
-        <input id="inputImg" type="file" required class="form-control"
-               placeholder="Opis" aria-label="Obrazek" name="file"
-               accept="image/png, image/jpeg, image/jpg">
-      </div>
-      <div class="col">
+
+  <form th:object="${meme}" method="post" th:action="@{/meme/add}"
+        class="needs-validation" novalidate
+        enctype="multipart/form-data">
+    <div class="row">
+      <div class="col-4">
         <label for="inputTitle" class="form-label">Tytuł</label>
-        <input id="inputTitle" type="text" required class="form-control" placeholder="Niech będzie zabawnie" aria-label="Tytuł" th:field="*{title}">
+        <input id="inputTitle" type="text" class="form-control"
+               placeholder="..." aria-label="Tytuł" th:field="*{title}"
+               required>
+        <div class="invalid-feedback">
+          Nadaj tytuł
+        </div>
       </div>
-      <div class="col">
+      <div class="col-3">
+        <label for="inputImg" class="form-label">Obraz</label>
+        <input id="inputImg" type="file" class="form-control"
+               placeholder="Opis" aria-label="Obrazek" name="file"
+               accept="image/png, image/jpeg, image/jpg"
+        required>
+        <div class="invalid-feedback">
+          Dodaj obrazek do swojego mema...
+        </div>
+      </div>
+      <div class="col-3">
         <label for="inputCategory" class="form-label">Kategoria</label>
         <select id="inputCategory" class="form-select" th:field="*{category}">
           <option th:each="category : ${categorylist}" th:value="${category.name}" ><p th:text="${category.name}"></p></option>
@@ -34,4 +46,37 @@
 </div>
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>
+
+<script>
+    //kradzione z bootstrapa
+    (function () {
+        'use strict' // <- javascript odpala sie w strict mode zabraniającym np używania niezadeklarowanych zmiennych
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    var image = document.getElementById("inputImg");
+                    //tu sie przerwie wysyłanie formularza jeżeli nie będzie prawidłowy
+                    //image.files[0] - nie wiem czemu w taki sposób, pewnie dlatego, że obiekt z formualrza to multipart file?
+                    if (!form.checkValidity() || !isFileImage(image.files[0])) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+    //funkcja sprawdzająca czy dodane pliki są obrazkiem.
+    function isFileImage(file) {
+        if(!(file && file['type'].split('/')[0] === 'image'))
+        {
+            alert("Tylko pliki obrazów są wspierane");
+            return false;
+        }
+        return true; //image && image['type'].split('/')[0] === 'image';
+    }
+</script>
 </html>
