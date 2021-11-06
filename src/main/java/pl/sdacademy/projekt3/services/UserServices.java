@@ -1,5 +1,8 @@
 package pl.sdacademy.projekt3.services;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.sdacademy.projekt3.entities.Comment;
 import pl.sdacademy.projekt3.entities.Meme;
@@ -14,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class UserServices {
+public class UserServices implements UserDetailsService {
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
     private final MemeRepository memeRepository;
@@ -48,6 +51,11 @@ public class UserServices {
     }
     public List<User> findAll(){
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+        return userRepository.findByLogin(username);
     }
 
 }

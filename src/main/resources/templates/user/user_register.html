@@ -20,7 +20,7 @@
 </nav>
 <div class="shadow-sm p-2 mb-3 bg-body rounded"></div>
 <div class="container">
-    <form th:object="${user}" method="post" autocomplete="off">
+    <form th:object="${user}" method="post" autocomplete="off" th:action="@{/user/register/}">
         <div class="bd-highlight mb-3">
             <div class="form-floating mb-3">
                 <input type="text" th:field="*{login}" required class="form-control" id="floatingInput"

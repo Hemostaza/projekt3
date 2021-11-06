@@ -31,20 +31,12 @@ public class MemeController {
     }
 
     //Pobranie z bazy danych obrazka w celu wyświetlenia go
-    @GetMapping("/download/{id}")
-    public void downloadImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
+    @GetMapping(path ="/download/{id}",produces = MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE )
+    public byte[] downloadImage(@PathVariable Integer id) throws IOException {
         //Mem ktory chce wysweitlic obrazek
         Meme meme = memeService.findById(id);
         //przypisanie obrazka z bazy danych do tablicy
-        byte[] image = meme.getImage();
-        //Wynik z http responsa
-        response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM.getType());
-        response.setHeader("Image", "Meme title =" + meme.getTitle());
-        response.setContentLength(image.length);
-        //wypisanie obrazka
-        OutputStream outputStream = response.getOutputStream();
-        outputStream.write(image, 0, image.length);
-        outputStream.close();
+        return meme.getImage();
 
     }
 
@@ -63,6 +55,7 @@ public class MemeController {
 
     @PostMapping("/add")
     public String saveMeme(Meme meme, @RequestParam("file") MultipartFile file) {
+        // file.getOriginalFilename()
         memeService.save(meme, file);
         return "redirect:/meme/list";
     }

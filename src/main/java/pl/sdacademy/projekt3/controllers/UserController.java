@@ -1,11 +1,14 @@
 package pl.sdacademy.projekt3.controllers;
 
+import com.sun.xml.bind.v2.runtime.output.Encoded;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.projekt3.entities.User;
 import pl.sdacademy.projekt3.repositories.UserRepository;
 import pl.sdacademy.projekt3.services.MemeService;
+import pl.sdacademy.projekt3.services.UserServices;
 
 import java.util.List;
 
@@ -29,6 +32,15 @@ public class UserController {
         return "user/user_list";
     }
 
+    @GetMapping("/login")
+    public String login(){
+        return "user/user_login";
+    }
+    @PostMapping("/login")
+    public String postlogin(){
+        return "user/user_login";
+    }
+
     @GetMapping("/register")
     public String registerUserForm(@ModelAttribute("user") User user) {
         return "user/user_register";
@@ -36,6 +48,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(User user) {
+        user.setRole("USER");
         userRepository.save(user);
         return "user/user_register_result";
     }

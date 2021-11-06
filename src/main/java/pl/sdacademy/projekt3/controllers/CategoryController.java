@@ -1,5 +1,6 @@
 package pl.sdacademy.projekt3.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,7 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("ADMIN")
     public String create(Category category) {
         categoryRepository.save(category);
         return "redirect:/";

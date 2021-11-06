@@ -6,6 +6,4 @@ import pl.sdacademy.projekt3.entities.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByLogin(String login);
 
-
-
 }
