@@ -1,8 +1,10 @@
 package pl.sdacademy.projekt3.services;
 
+import com.sun.xml.bind.v2.runtime.output.Encoded;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sdacademy.projekt3.entities.Comment;
 import pl.sdacademy.projekt3.entities.Meme;
@@ -21,15 +23,23 @@ public class UserServices implements UserDetailsService {
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
     private final MemeRepository memeRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServices(UserRepository userRepository, CommentRepository commentRepository, MemeRepository memeRepository) {
+    public UserServices(UserRepository userRepository, CommentRepository commentRepository, MemeRepository memeRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.commentRepository = commentRepository;
         this.memeRepository = memeRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User findById(int id){
         return userRepository.findById(id).orElseThrow(()->new NullPointerException("Nie ma użytkownika o zadanym identyfikatorze"));
+    }
+
+    public void save(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("USER");
+        userRepository.save(user);
     }
 
 

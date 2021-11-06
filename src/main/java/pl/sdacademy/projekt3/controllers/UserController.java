@@ -48,8 +48,8 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(User user) {
-        user.setRole("USER");
-        userRepository.save(user);
+        //user.setRole("USER");
+        userServices.save(user);
         return "user/user_register_result";
     }
 
