@@ -1,6 +1,6 @@
 body {
-    background-color: snow;
+    background-color:whitesmoke;
 }
 .carousel-inner > .carousel-item > img {
-    height: 100vh;
+    height: 80vh;
 }

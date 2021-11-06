@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="myFragments :: myHead(title='Lista kategorii')"></head>
+<head th:replace="myFragments :: myHead(title='Lista kategorii')">
+</head>
 <body>
-<h1>Lista kategorii:</h1>
+<div th:replace="myFragments :: navigationBarOtherThanIndex"></div>
+<div>
+<h1>Lista kategorii:</h1></div>
 <div th:fragment="categories">
 <table>
     <tr th:each="category: ${categorylist}">
