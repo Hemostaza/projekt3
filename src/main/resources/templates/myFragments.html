@@ -57,6 +57,11 @@
           </li>
           <li class="nav-item"><a class="nav-link" th:href="@{/login}">Sign in</a></li>
           <li class="nav-item"><a class="nav-link" th:href="@{/user/register}">Sign up</a></li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <form method="post" th:action="@{/logout}">
+              <input type="submit" class="btn btn-outline-dark" value="Sign out"></input>
+            </form>
+          </li>
         </ul>
       </div>
     </div>
@@ -102,6 +107,11 @@
           </li>
           <li class="nav-item"><a class="nav-link" th:href="@{/login}">Sign in</a></li>
           <li class="nav-item"><a class="nav-link" th:href="@{/user/register}">Sign up</a></li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <form method="post" th:action="@{/logout}">
+              <input type="submit" class="btn btn-outline-dark" value="Sign out"></input>
+            </form>
+          </li>
         </ul>
       </div>
     </div>
