@@ -14,7 +14,7 @@
                 <path fill-rule="evenodd"
                       d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
             </svg>
-            Rejestracja użytkownika
+            Registering
         </a>
     </div>
 </nav>
@@ -25,13 +25,13 @@
             <div class="form-floating mb-3">
                 <input type="text" th:field="*{login}" required class="form-control" id="floatingInput"
                        placeholder="user1">
-                <label for="floatingInput">Nazwa użytkownika (login):</label>
+                <label for="floatingInput">Login:</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="password" th:field="*{password}" required class="form-control"
                        id="floatingPassword"
                        placeholder="Hasło">
-                <label for="floatingPassword">Hasło:</label>
+                <label for="floatingPassword">Password:</label>
             </div>
             <div class="form-floating mb-3">
                 <input type="email" th:field="*{email}" required class="form-control" id="floatingEmail"
@@ -39,13 +39,12 @@
                 <label for="floatingEmail">Email:</label>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary">Zarejestruj</button>
+                <button type="submit" class="btn btn-primary">Sign up</button>
             </div>
         </div>
     </form>
-    <hr>
-    <a th:href="@{/}">Powrót</a>
 </div>
+
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>
 </html>
