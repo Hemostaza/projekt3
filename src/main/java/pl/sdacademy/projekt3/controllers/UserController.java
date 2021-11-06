@@ -85,8 +85,17 @@ public class UserController {
         return "redirect:/user/list";
     }
 
+    @GetMapping("/promote/{user}")
+    public String promote(@PathVariable String user){
+        userServices.promoteToAdmin(userRepository.findByLogin(user));
+        return "user/user_register_result";
+    }
 
-
+    @GetMapping("/demote/{user}")
+    public String demote(@PathVariable String user){
+        userServices.demoteToUser(userRepository.findByLogin(user));
+        return "user/user_register_result";
+    }
     //STRONA UZYTKOWNIKA
     //komentarze użytkownika
     //memy użytkownika

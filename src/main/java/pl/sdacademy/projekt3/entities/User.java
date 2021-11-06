@@ -3,6 +3,7 @@ package pl.sdacademy.projekt3.entities;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.sdacademy.projekt3.Role;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class User implements UserDetails {
     private String login;
     private String password;
     private String email;
-    private String role;
+    private Enum<Role> role;
 
     public void setId(Integer id) {
         this.id = id;
@@ -53,17 +54,17 @@ public class User implements UserDetails {
         return email;
     }
 
-    public String getRole() {
+    public Enum<Role> getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Enum<Role> role) {
         this.role = role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_" + role);
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role.toString());
         return Collections.singleton(simpleGrantedAuthority);
     }
 

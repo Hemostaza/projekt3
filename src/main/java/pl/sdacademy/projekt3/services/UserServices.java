@@ -1,11 +1,11 @@
 package pl.sdacademy.projekt3.services;
 
-import com.sun.xml.bind.v2.runtime.output.Encoded;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.sdacademy.projekt3.Role;
 import pl.sdacademy.projekt3.entities.Comment;
 import pl.sdacademy.projekt3.entities.Meme;
 import pl.sdacademy.projekt3.entities.User;
@@ -15,7 +15,6 @@ import pl.sdacademy.projekt3.repositories.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -38,7 +37,17 @@ public class UserServices implements UserDetailsService {
 
     public void save(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("USER");
+        user.setRole(Role.ROLE_USER);
+        userRepository.save(user);
+    }
+
+    public void promoteToAdmin(User user){
+        user.setRole(Role.ROLE_ADMIN);
+        userRepository.save(user);
+    }
+
+    public void demoteToUser(User user){
+        user.setRole(Role.ROLE_USER);
         userRepository.save(user);
     }
 
