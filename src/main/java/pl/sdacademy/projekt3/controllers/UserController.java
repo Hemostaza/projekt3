@@ -15,14 +15,16 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private final UserRepository userRepository;
+    private final UserRepository userRepository; // <- całkowicie usunąć w przyszłości i przenieśc wszystko co istotne na userServices;
+    private final UserServices userServices;
     //private final CommentRepository commentRepository;
     private final MemeService memeService;
 
-    public UserController(UserRepository userRepository, MemeService memeService) {
+    public UserController(UserRepository userRepository, MemeService memeService, UserServices userServices) {
         this.userRepository = userRepository;
         //this.commentRepository = commentRepository;
         this.memeService = memeService;
+        this.userServices = userServices;
     }
 
     @GetMapping("/list")
@@ -48,7 +50,6 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(User user) {
-        //user.setRole("USER");
         userServices.save(user);
         return "user/user_register_result";
     }

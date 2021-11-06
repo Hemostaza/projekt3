@@ -37,7 +37,7 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    @PreAuthorize("ADMIN")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String create(Category category) {
         categoryRepository.save(category);
         return "redirect:/";
