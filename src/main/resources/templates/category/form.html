@@ -20,18 +20,17 @@
         <form class="row g-3">
             <div class="col-auto">
                 <label for="nowakategoriaid" class="visually-hidden">Name</label>
-                <input type="text" readonly class="form-control-plaintext" id="nowakategoriaid" value="Nazwa kategorii:">
+                <input type="text" readonly class="form-control-plaintext" id="nowakategoriaid" value="Category's name:">
             </div>
             <div class="col-auto">
-                <label for="kategoriaid" class="visually-hidden">Nazwa kategorii</label>
-                <input type="text" th:field="*{name}" class="form-control" id="kategoriaid" placeholder="Np. Zabawne">
+                <label for="kategoriaid" class="visually-hidden">Category's name</label>
+                <input type="text" th:field="*{name}" class="form-control" id="kategoriaid" placeholder="e.g. Funny">
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3">Dodaj</button>
+                <button type="submit" class="btn btn-primary mb-3">Create</button>
             </div>
         </form>
     </form>
-    <a th:href="@{/}">Powrót</a>
 </div>
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>
