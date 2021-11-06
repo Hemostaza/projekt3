@@ -46,6 +46,7 @@
 <div th:replace="myFragments :: navigationBar"></div>
 <div th:if="${param.logout}">Zostałeś wylogowany</div>
 <div th:insert="meme/memelist.html :: memeListFragment(memes = ${memelist})"></div>
+<div th:replace="myFragments :: pagination"></div>
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>
 </html>
