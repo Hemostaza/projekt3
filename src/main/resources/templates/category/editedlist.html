@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head th:replace="myFragments :: myHead(title='Edit category')"></head>
 <body>
-<div th:replace="myFragments :: navigationBarOtherThanIndex"></div>
+<div th:replace="myFragments :: navigationBar"></div>
 <h1>Edit</h1>
 <form th:object="${category}" th:action="@{/category/edit}" method="post">
     <label>Name: <input type="text" th:field="*{name}"></label>

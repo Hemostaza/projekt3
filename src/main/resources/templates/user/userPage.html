@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="myFragments :: myHead(title = 'Strona użytkownika')"></head>
 <body>
-<div th:replace="myFragments :: navigationBarOtherThanIndex"></div>
+<div th:replace="myFragments :: navigationBar"></div>
 <h1>Strona Uzytkownika</h1>
 <tr>
     <th>Login: <td th:text="${login.login}"></td></th>

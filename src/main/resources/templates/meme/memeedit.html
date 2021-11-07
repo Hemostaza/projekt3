@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="myFragments :: myHead(title = 'Edycja mema')"></head>
 <body>
-<div th:replace="myFragments :: navigationBarOtherThanIndex"></div>
+<div th:replace="myFragments :: navigationBar"></div>
 <h1>Edytuj</h1>
 <form th:object="${meme}" th:action="@{/meme/edit}" method="post">
     <label>Kategoria: <input type="text" th:field="*{category}"></label>

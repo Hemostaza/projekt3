@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="myFragments :: myHead(title = ${meme.title})"></head>
+<head th:replace="myFragments :: myHead(title = ${meme.title})">
+
+</head>
 <body>
-<div th:replace="myFragments :: navigationBarOtherThanIndex"></div>
+
+<div th:replace="myFragments :: navigationBar"></div>
 
 <div th:insert="meme/memelist.html :: memeListFragment(memes = ${meme})"></div>
 
