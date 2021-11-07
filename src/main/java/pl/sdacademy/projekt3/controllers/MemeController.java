@@ -1,5 +1,6 @@
 package pl.sdacademy.projekt3.controllers;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MimeTypeUtils;
@@ -64,9 +65,9 @@ public class MemeController {
         return "meme/memelist";
     }
 
-    @GetMapping("/add/{userId}")
-    public String addMeme(ModelMap modelMap, @ModelAttribute("meme") Meme meme, @PathVariable int userId) {
-        modelMap.addAttribute("userById", userServices.findById(userId));
+    @GetMapping("/add")
+    public String addMeme(ModelMap modelMap, @ModelAttribute("meme") Meme memes, Authentication authentication) {
+        modelMap.addAttribute("user", userServices.findByLogin(authentication.getName()));
         return "meme/memeaddform";
     }
 
@@ -111,8 +112,8 @@ public class MemeController {
     }
 
     @PostMapping("/list/by-id/{memeId}")
-    public String addComment(Comment comment, @PathVariable Integer memeId, ModelMap modelMap) {
-        userServices.addComment(comment, memeId);
+    public String addComment(Comment comment, @PathVariable Integer memeId, ModelMap modelMap, Authentication authentication) {
+        userServices.addComment(comment, memeId, authentication);
         modelMap.addAttribute("meme", memeService.findById(memeId));
         return "redirect:/meme/list/by-id/{memeId}";
     }
@@ -123,6 +124,7 @@ public class MemeController {
         modelMap.addAttribute("memes", memes);
         return "meme/memelist";
     }
+
 //    @GetMapping("/upvote/{id}")
 //    public String upvote(Meme meme){
 //        Meme meme1 = memeService.getById(meme.getId());

@@ -1,5 +1,6 @@
 package pl.sdacademy.projekt3.services;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,6 +35,9 @@ public class UserServices implements UserDetailsService {
     public User findById(int id){
         return userRepository.findById(id).orElseThrow(()->new NullPointerException("Nie ma użytkownika o zadanym identyfikatorze"));
     }
+    public User findByLogin(String login){
+        return userRepository.findByLogin(login);
+    }
 
     public void save(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -57,9 +61,13 @@ public class UserServices implements UserDetailsService {
     //aczkolwiek wrazie czego zawsze można to przenieść lub nawet rozbić na poszczegulne serwisy
     //np nie wysyłać tu int memeId a samego mema żeby nie szukać już go w repo
     //zawsze da się kod poprawić narazie niech działa
-    public void addComment(Comment comment, int memeId){
+    public void addComment(Comment comment, int memeId, Authentication authentication){
         //znalezienie mema do którego tyczy się komentarz
         Meme meme = memeRepository.findById(memeId).orElseThrow(()-> new NullPointerException("Nie ma mema o id"));
+        //znalezienie usera który dodaje komentarz
+        User user = userRepository.findByLogin(authentication.getName());
+        //wstawienie usera dodajacego koemntarz w komentarz xD
+        comment.setUser(user);
         //dodanie komentarza
         meme.getComments().add(comment);
         //zapisanie komentarza
@@ -70,6 +78,10 @@ public class UserServices implements UserDetailsService {
     }
     public List<User> findAll(){
         return userRepository.findAll();
+    }
+
+    public List<Comment> findAllComments(int id){
+        return commentRepository.getAllByUser_Id(id);
     }
 
     @Override

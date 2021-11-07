@@ -1,9 +1,24 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="myFragments :: myHead(title = 'Komentarze')"></head>
 <body>
-<h1>Lista komentarzy</h1>
-<table>
+<div th:fragment="commentlistFragment" class="container">
+
+  <table class="col-3">
+    <tr th:each="comment : ${comments}">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted" th:text="${comment.user.login}"></h6>
+            <p class="card-text" th:text="${comment.text}"></p>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </tr>
+  </table>
+</div>
+<!--<table>
     <tr>
         <th>Użytkownik</th>
         <th>Komentarz</th>
@@ -12,7 +27,7 @@
         <td th:text="${comment.user.login}"></td>
         <td th:text="${comment.text}"></td>
     </tr>
-</table>
+</table> -->
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>
 </html>

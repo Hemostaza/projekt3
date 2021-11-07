@@ -48,6 +48,11 @@ public class MemeService {
         return memeRepository.findAllByUser_Id(id);
     }
 
+    public List<Meme> findAllByUserLogin(String login)
+    {
+        return memeRepository.findAllByUser_Login(login);
+    }
+
     public List<Meme> findAllByCategory(String category){
         return memeRepository.findAllByCategory(category);
     }

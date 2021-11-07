@@ -8,5 +8,6 @@ import java.util.List;
 public interface MemeRepository extends JpaRepository<Meme, Integer> {
     List<Meme> findAllByUser_Id(int id);
     List<Meme> findAllByCategory(String category);
+    List<Meme> findAllByUser_Login(String login);
 
 }

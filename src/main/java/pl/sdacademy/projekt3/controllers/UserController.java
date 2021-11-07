@@ -40,11 +40,12 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "user/user_login";
     }
+
     @PostMapping("/login")
-    public String postlogin(){
+    public String postlogin() {
         return "user/user_login";
     }
 
@@ -94,13 +95,13 @@ public class UserController {
     }
 
     @GetMapping("/promote/{user}")
-    public String promote(@PathVariable String user){
+    public String promote(@PathVariable String user) {
         userServices.promoteToAdmin(userRepository.findByLogin(user));
         return "user/user_register_result";
     }
 
     @GetMapping("/demote/{user}")
-    public String demote(@PathVariable String user){
+    public String demote(@PathVariable String user) {
         userServices.demoteToUser(userRepository.findByLogin(user));
         return "user/user_register_result";
     }
@@ -110,16 +111,12 @@ public class UserController {
     //odnosniki do edycji komentarzy/memów
     //odnosnik do usunięcie konta
 
-    @GetMapping("/{user}")
+    @GetMapping("/mypage")
     @PreAuthorize("isAuthenticated()") //trzeba sie zalogować
-    public String userMems(@PathVariable String user, ModelMap modelMap, Authentication authentication) { //Authentication to nasz zalogowany user
-        //Znalezienie użytkownika na podstawie adresu {user}
-        //pobranie zalogowanego użytkownika authentication potem @pathVariable będzie można usunąć i zamotać inny mapping
-        User userObj = userRepository.findByLogin(authentication.getName());
-modelMap.addAttribute("login",userObj);
-//modelMap.addAttribute("userComment", commentRepository.findByUser(user));
-//znalezienie memów konkretnego użytkownika z id obiektu użytkownika
-modelMap.addAttribute("userMeme",memeService.findAllByUserId(userObj.getId()));
+    public String userMems(ModelMap modelMap, Authentication authentication) { //Authentication to nasz zalogowany user
+        User user = userRepository.findByLogin(authentication.getName()); //zabranie obiektu użytkownika z bazy na podstawie zalogowanego
+        modelMap.addAttribute("usermemes", memeService.findAllByUserId(user.getId())); //lista memów użytkownika
+        modelMap.addAttribute("usercomments", userServices.findAllComments(user.getId()));
 
         return "user/userPage";
     }

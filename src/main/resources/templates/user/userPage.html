@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="myFragments :: myHead(title = 'Strona użytkownika')"></head>
 <body>
 <div th:replace="myFragments :: navigationBar"></div>
-<h1>Strona Uzytkownika</h1>
-<tr>
+
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container-md">
+        <a class="navbar-brand" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-fill"
+                 viewBox="0 0 16 16">
+                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+            Your page <b sec:authentication="name"></b>
+            <form class="d-flex">
+                <a th:href="@{/meme/add}" class="btn btn-light" role="button">Post new MEME</a>
+                <button class="btn btn-sm btn-outline-secondary" type="button">Smaller button</button>
+            </form>
+        </a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-6 col-md-auto">
+            <h1>Your memes</h1>
+            <div th:insert="meme/memelist.html :: memeListFragment(memes = ${usermemes})"></div>
+        </div>
+        <div class="col-4">
+            <h1>Comments</h1>
+            <div th:insert="comment/list.html :: commentlistFragment(comments = ${usercomments})"></div>
+        </div>
+    </div>
+
+<!-- <tr>
     <th>Login: <td th:text="${login.login}"></td></th>
     <p></p>
     <th>E-mail: <td th:text="${login.email}"></td></th>
@@ -35,14 +62,13 @@
         </tr>
         <tr th:each="meme : ${userMeme}">
             <td th:text="${meme.user}"></td>
-            <!-- <td th:text="${meme.getDescription()}"></td> -->
+            !-- <td th:text="${meme.getDescription()}"></td> --
 
         </tr>
     </table>
 
-</tr>
-<p></p>
-
+</tr> -->
+</div>
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <div th:replace="myFragments :: navigationBar"></div>
 
 <div class="container">
-
+<hr>
   <form th:object="${meme}" method="post" th:action="@{/meme/add}"
         class="needs-validation" novalidate
         enctype="multipart/form-data">
@@ -37,7 +37,7 @@
         </select>
       </div>
     </div>
-    <input type="hidden" name="user" th:value="${userById.getId()}">
+    <input type="hidden" name="user" th:value="${#authentication.getPrincipal().getId()}">
     <input type="hidden" name="alternateText" value="Alternatywny text na chwile obecną">
     <div class="col-12">
       <button type="submit" class="btn btn-primary mt-2">Add meme</button>

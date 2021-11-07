@@ -58,7 +58,7 @@
               <li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item" th:href="@{/category/list}">List</a></li>
             </ul>
           </li>
-          <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{user/{user}(user=${#authentication.getPrincipal().getLogin()})}">My</a></li>
+          <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/user/mypage}">My</a></li>
           <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" th:href="@{/login}">Sign in</a></li>
           <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link" th:href="@{/user/register}">Sign up</a></li>
           <li sec:authorize="isAuthenticated()" class="nav-item">
