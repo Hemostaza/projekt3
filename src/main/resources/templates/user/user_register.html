@@ -23,19 +23,25 @@
     <form th:object="${user}" method="post" autocomplete="off" th:action="@{/user/register/}">
         <div class="bd-highlight mb-3">
             <div class="form-floating mb-3">
-                <input type="text" th:field="*{login}" required class="form-control" id="floatingInput"
-                       placeholder="user1">
+                <input type="text" th:field="*{login}" class="form-control" id="floatingInput" placeholder="user1"
+                       th:classappend="${#fields.hasErrors('login')} ? 'is-invalid' : (${#fields.hasErrors()} ? 'is-valid' : '')">
+                <div class="invalid-feedback" th:errors="*{login}"></div>
                 <label for="floatingInput">Login:</label>
+
             </div>
             <div class="form-floating mb-3">
-                <input type="password" th:field="*{password}" required class="form-control"
+                <input type="password" th:field="*{password}" class="form-control"
                        id="floatingPassword"
-                       placeholder="Hasło">
+                       placeholder="Hasło"
+                       th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : (${#fields.hasErrors()} ? 'is-valid' : '')">
+                <div class="invalid-feedback" th:errors="*{password}"></div>
                 <label for="floatingPassword">Password:</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="email" th:field="*{email}" required class="form-control" id="floatingEmail"
-                       placeholder="example@wpl.pl">
+                <input type="email" th:field="*{email}" class="form-control" id="floatingEmail"
+                       placeholder="example@wpl.pl"
+                       th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : (${#fields.hasErrors()} ? 'is-valid' : '')">
+                <div class="invalid-feedback" th:errors="*{email}"></div>
                 <label for="floatingEmail">Email:</label>
             </div>
             <div>

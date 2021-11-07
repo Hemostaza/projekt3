@@ -6,6 +6,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.projekt3.entities.User;
 import pl.sdacademy.projekt3.repositories.UserRepository;
@@ -52,7 +54,10 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(User user) {
+    public String registerUser(@Validated User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "user/user_register";
+        }
         userServices.save(user);
         return "user/user_register_result";
     }
