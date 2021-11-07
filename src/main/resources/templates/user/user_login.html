@@ -20,11 +20,15 @@
     <form method="post" autocomplete="off" th:action="@{/user/login}">
         <div class="bd-highlight mb-3">
             <div class="form-floating mb-3">
-                <input type="text" name="username" required class="form-control" id="floatingInput" placeholder="Nazwa użytkownika">
+                <input type="text" required name="username" class="form-control"
+                       id="floatingInput"
+                       placeholder="Nazwa użytkownika">
                 <label for="floatingInput">Login:</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" name="password" required class="form-control" id="floatingPassword" placeholder="Hasło">
+                <input type="password" required name="password" class="form-control"
+                       id="floatingPassword"
+                       placeholder="Hasło">
                 <label for="floatingPassword">Password:</label>
             </div>
             <div class="form-group form-check text-left">

@@ -25,7 +25,6 @@ public class User implements UserDetails {
     private String login;
     @NotEmpty(message = "Hasło nie może być puste")
     private String password;
-    @Email(message = "Wpisz poprawny adres email tj. ze znakiem @")
     @NotEmpty(message = "Email nie może być pusty")
     private String email;
     private Enum<Role> role;
