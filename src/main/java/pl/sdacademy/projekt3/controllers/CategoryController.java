@@ -3,6 +3,8 @@ package pl.sdacademy.projekt3.controllers;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.projekt3.entities.Category;
 import pl.sdacademy.projekt3.repositories.CategoryRepository;
@@ -38,7 +40,10 @@ public class CategoryController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String create(Category category) {
+    public String create(@Validated Category category, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "category/form";
+        }
         categoryRepository.save(category);
         return "redirect:/";
     }

@@ -24,8 +24,13 @@
             </div>
             <div class="col-auto">
                 <label for="kategoriaid" class="visually-hidden">Category's name</label>
-                <input type="text" th:field="*{name}" required class="form-control" id="kategoriaid" placeholder="e.g. Funny">
+                <input type="text" th:field="*{name}" class="form-control"
+                       id="kategoriaid"
+                       placeholder="e.g. Funny"
+                       th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : (${#fields.hasErrors()} ? 'is-valid' : '')">
+                <div class="invalid-feedback" th:errors="*{name}"></div>
             </div>
+
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary mb-3 mt-2">Create</button>
             </div>
