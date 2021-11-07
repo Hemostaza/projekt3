@@ -31,14 +31,31 @@ public class MemeController {
     }
 
     //Pobranie z bazy danych obrazka w celu wyświetlenia go
-    @GetMapping(path ="/download/{id}",produces = MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE )
-    public byte[] downloadImage(@PathVariable Integer id) throws IOException {
-        //Mem ktory chce wysweitlic obrazek
-        Meme meme = memeService.findById(id);
-        //przypisanie obrazka z bazy danych do tablicy
-        return meme.getImage();
-
+    //wersja do poprawy ale działa
+    @GetMapping("/download/{id}")
+    public void downloadImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
+    //Mem ktory chce wysweitlic obrazek
+    Meme meme = memeService.findById(id);
+    //przypisanie obrazka z bazy danych do tablicy
+    byte[] image = meme.getImage();
+    //Wynik z http responsa
+        response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM.getType());
+        response.setHeader("Image", "Meme title =" + meme.getTitle());
+        response.setContentLength(image.length);
+    //wypisanie obrazka
+    OutputStream outputStream = response.getOutputStream();
+        outputStream.write(image, 0, image.length);
+        outputStream.close();
     }
+
+    //wersja lepsza ale do poprawy z wyświetlaniem :>
+    //       @GetMapping(path ="/download/{id}",produces = MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE )
+//    public byte[] downloadImage(@PathVariable Integer id) throws IOException {
+//        //Mem ktory chce wysweitlic obrazek
+//        Meme meme = memeService.findById(id);
+//        //przypisanie obrazka z bazy danych do tablicy
+//        return meme.getImage();
+
 
     @GetMapping("/list")
     public String getMemes(ModelMap modelMap) {
