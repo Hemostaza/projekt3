@@ -1,17 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head th:replace="myFragments :: myHead(title='Lista kategorii')">
 </head>
 <body>
 <div th:replace="myFragments :: navigationBar"></div>
-<div>
-<h1>Lista kategorii:</h1></div>
-<div th:fragment="categories">
-<table>
-    <tr th:each="category: ${categorylist}">
-        <td><a th:href="@{/meme/list/by-category/{category}(category=${category.name})}"  th:text="${category.name}"></a></td>
-    </tr>
-</table>
+<div class="container">
+    <h1>Categories:</h1>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                        aria-controls="panelsStayOpen-collapseOne">
+                    List:
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                 aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <strong>This is the list of all categories available on our Meme's Page.</strong> Click on one
+                    and you will see all memes added by users related to this particular category. <code>Have fun!</code>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="=list-group" th:fragment="categories">
+        <table>
+            <tr th:each="category: ${categorylist}">
+                <td><a th:href="@{/meme/list/by-category/{category}(category=${category.name})}"
+                       th:text="${category.name}"
+                       class="list-group-item list-group-item-action"></a></td>
+            </tr>
+        </table>
+    </div>
 </div>
 <footer th:replace="myFragments :: myFooter"></footer>
 </body>
