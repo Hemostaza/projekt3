@@ -12,7 +12,7 @@
         enctype="multipart/form-data">
     <div class="row">
       <div class="col-4">
-        <label for="inputTitle" class="form-label">Tytuł</label>
+        <label for="inputTitle" class="form-label">Title</label>
         <input id="inputTitle" type="text" class="form-control"
                placeholder="..." aria-label="Tytuł" th:field="*{title}"
                required>
@@ -21,17 +21,17 @@
         </div>
       </div>
       <div class="col-3">
-        <label for="inputImg" class="form-label">Obraz</label>
+        <label for="inputImg" class="form-label">Image</label>
         <input id="inputImg" type="file" class="form-control"
                placeholder="Opis" aria-label="Obrazek" name="file"
                accept="image/png, image/jpeg, image/jpg"
         required>
         <div class="invalid-feedback">
-          Dodaj obrazek do swojego mema...
+          Add image to your meme...
         </div>
       </div>
       <div class="col-3">
-        <label for="inputCategory" class="form-label">Kategoria</label>
+        <label for="inputCategory" class="form-label">Category</label>
         <select id="inputCategory" class="form-select" th:field="*{category}">
           <option th:each="category : ${categorylist}" th:value="${category.name}" ><p th:text="${category.name}"></p></option>
         </select>
@@ -40,7 +40,7 @@
     <input type="hidden" name="user" th:value="${userById.getId()}">
     <input type="hidden" name="alternateText" value="Alternatywny text na chwile obecną">
     <div class="col-12">
-      <button type="submit" class="btn btn-primary">Dodaj Mema</button>
+      <button type="submit" class="btn btn-primary mt-2">Add meme</button>
     </div>
   </form>
 </div>
