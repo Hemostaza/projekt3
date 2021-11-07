@@ -1,6 +1,9 @@
 package pl.sdacademy.projekt3.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
@@ -8,17 +11,22 @@ public class Meme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotEmpty(message = "Tytuł nie może być pusty")
+    @NotBlank(message = "Tytuł nie może zawierać samych białych znaków")
     private String title;
     //relacja do kategorii
+    @NotEmpty(message = "Kategoria nie może być pusta")
     private String category;
     //relacja do użytkownika dodającego mema
     //wiele memów od jednego użytkownika
     @ManyToOne
+    @NotNull(message = "Użytkownik nie może być nullem")
     private User user;
     //Później obrazek
     private String alternateText;
     //Tutaj obrazek
     @Lob
+    @NotEmpty
     private byte[] image;
 
     private int rating = 0;

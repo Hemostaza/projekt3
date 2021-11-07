@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @ControllerAdvice
@@ -35,16 +36,16 @@ public class MemeController {
     //wersja do poprawy ale działa
     @GetMapping("/download/{id}")
     public void downloadImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
-    //Mem ktory chce wysweitlic obrazek
-    Meme meme = memeService.findById(id);
-    //przypisanie obrazka z bazy danych do tablicy
-    byte[] image = meme.getImage();
-    //Wynik z http responsa
+        //Mem ktory chce wysweitlic obrazek
+        Meme meme = memeService.findById(id);
+        //przypisanie obrazka z bazy danych do tablicy
+        byte[] image = meme.getImage();
+        //Wynik z http responsa
         response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM.getType());
         response.setHeader("Image", "Meme title =" + meme.getTitle());
         response.setContentLength(image.length);
-    //wypisanie obrazka
-    OutputStream outputStream = response.getOutputStream();
+        //wypisanie obrazka
+        OutputStream outputStream = response.getOutputStream();
         outputStream.write(image, 0, image.length);
         outputStream.close();
     }
@@ -72,8 +73,13 @@ public class MemeController {
     }
 
     @PostMapping("/add")
-    public String saveMeme(Meme meme, @RequestParam("file") MultipartFile file) {
-        // file.getOriginalFilename()
+    public String saveMeme(Meme meme, @RequestParam("file") MultipartFile file) throws Exception {
+        if (file == null || file.isEmpty()) {
+            throw new Exception("Plik jest pusty lub go nie ma");
+        }
+        if (!file.getContentType().startsWith("image/")) {
+            throw new Exception("Plik nie jest obrazkiem");
+        }
         memeService.save(meme, file);
         return "redirect:/meme/list";
     }
