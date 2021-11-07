@@ -1,6 +1,8 @@
 package pl.sdacademy.projekt3.controllers;
 
 import com.sun.xml.bind.v2.runtime.output.Encoded;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,6 +12,7 @@ import pl.sdacademy.projekt3.repositories.UserRepository;
 import pl.sdacademy.projekt3.services.MemeService;
 import pl.sdacademy.projekt3.services.UserServices;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -103,9 +106,11 @@ public class UserController {
     //odnosnik do usunięcie konta
 
     @GetMapping("/{user}")
-    public String userMems(@PathVariable String user, ModelMap modelMap) {
+    @PreAuthorize("isAuthenticated()") //trzeba sie zalogować
+    public String userMems(@PathVariable String user, ModelMap modelMap, Authentication authentication) { //Authentication to nasz zalogowany user
         //Znalezienie użytkownika na podstawie adresu {user}
-        User userObj = userRepository.findByLogin(user);
+        //pobranie zalogowanego użytkownika authentication potem @pathVariable będzie można usunąć i zamotać inny mapping
+        User userObj = userRepository.findByLogin(authentication.getName());
 modelMap.addAttribute("login",userObj);
 //modelMap.addAttribute("userComment", commentRepository.findByUser(user));
 //znalezienie memów konkretnego użytkownika z id obiektu użytkownika
